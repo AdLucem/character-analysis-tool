@@ -1,0 +1,13 @@
+#+TITLE: On The Difficulty of Detecting Characters in Literary Texts
+#+AUTHOR: KW
+
+* What is wrong with NER-based approaches
+* Detecting Characters
+
+An *8-stage* pipeline is propopsed for detecting characters.
+
+This pipeline builds a graph where nodes are names and edges connect names belonging to the same character.
+
+(1) The vertices in the graph are initially populated by:
+      - Running NER over the corpus
+      - Identifying names that follow a honorific (list of honorifics maintained?)
