@@ -8,6 +8,37 @@ An *8-stage* pipeline is propopsed for detecting characters.
 
 This pipeline builds a graph where nodes are names and edges connect names belonging to the same character.
 
-(1) The vertices in the graph are initially populated by:
-      - Running NER over the corpus
-      - Identifying names that follow a honorific (list of honorifics maintained?)
+
+       NAME RECOGNITION                                       COREFENCES                                      NAME VARIATION
+|---+-------+-----+-------------------------+---+--------+----------------------------+------+----------------------+-----+----------------|
+|   | ----- |     | ----------------------- |   |        | (Stanford CoreNLP)         |      | Name Variation Rules |     |                |
+|   | NER   | --> | If-Follows-Honorific    |   | -----> | Coreference resolution     | ---> | (** What are they)   | --> | Name Variation |
+|   | ----- |     | ----------------------- |   |        | :: Edges added where names |      | ???                  |     | Gazzetteer     |
+|   |       |     |                         |   |        | co-occur in chain          |      |                      |     | (this is )     |
+|   |       |     |                         |   |        |                            |      |                      |     | (retarded )    |
+|---+-------+-----+-------------------------+---+--------+----------------------------+------+----------------------+-----+----------------|
+                                                                                                                                  |
+        |-------------------------------------------------------------------------------------------------------------------------|
+        |
+       \|/     MERGING                                NON-NE CHARACTERS             FUCK THE REMAINING NODES
+|--------------+--------+-------------------+------+-----------------------+------+-------------------------|
+| Name-Merging | -----> | Name-Merging      |      | Characters Identified |      | Removal of Disconnected |
+| (Heuristics) |        | (Rules based on ) | ---> | By Character-Asso-    | ---> | Nodes (??????)          |
+|              |        | Corpora)          |      | ciated Verbs          |      |                         |
+|--------------+--------+-------------------+------+-----------------------+------+-------------------------|
+
+* Stanford CoreNLP CorefAnnotator
+
+# what does the thing do? what model does it use?
+
+  - The F1 scores for corefence resolution are themselves low. Unless we want to work on a coref system... better ways of getting coreferences 
+
+* Problems In Implementing This
+
+  - Where the fuck are the rules (for the rule-based stages) and the gazzetteers?
+
+* Observations and Notes
+
+  - Our proposed 'alternate' system for resolving aliases *is* social network system
+  - Will anything be gained by dependency parsing the data as a form of preprocessing?
+  - play around with coreference resolution system? 
