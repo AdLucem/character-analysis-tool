@@ -1,0 +1,65 @@
+#+TITLE: Extracting Social Networks From Literary Fiction
+#+AUTHOR: K.W.L
+
+
+Me, five minutes after suggesting character disambiguation using "related characters" : Oh, /that/ is a social network?
+
+* Social Network --> Conversational Network?
+
+This paper defines a social network as a conversational network for the purpose of evaluating these literary theories.
+
+# why? what purpose does this serve?
+
+Vertices --> characters
+Edges --> dialogue interaction between characters
+
+# what about characters that do not interact through dialogue
+
+Edges are *weighted* --> weight is proportional to the amount of interaction.
+
+** Defining /Conversation/
+
+#+BEGIN_QUOTE
+
+A continuous span of narrative time featuring a set of characters in which the following conditions are met:
+
+(1) The characters are in the same place at the same time 
+
+# telephone/other remote conversations?
+
+(2) The characters take turns speaking
+
+# why this one? why not speeches?
+
+(3) The characters are mutually aware of each other and each character's speech is mutually intended for the other to hear
+
+#+END_QUOTE
+
+* Solving The Subproblems
+
+Oh, they /generate/ name variations from identified Named Entities.
+
+That is... certainly a method that could do to be combined with the hypocorisms-gazetteer approach.
+
+This, of course, has the expected drawback that this will not pick up characters that are named entities. The other paper certainly picks up on these flaws.
+
+"In all we were able to determine the speaker of 57% of the testing set with 96% accuracy"
+
+# W: that is an... interesting measurement.
+# Nox: *laughing* F1 value bol, chutiye!
+
+# W: "empirically determined" == "fucked around until we found it"
+
+* My Own Thoughts - KW
+
+This is not a paper that is directly mappable to character analysis, although I suppose we could do with noting down their pipeline architecture and trying to transpose it to our project, if possible.
+
+The redefinition of social networks as conversational networks is great for the very narrow purpose of this paper, but is far too narrow to use in other fields of NLP (unless of course we wish to confine ourselves to 19-th century literary fiction as our sole source of data.) I would like to see this method run on a novel heavy on predominantly-single-character-perspective novels, such as Harry Potter. Ah, better yet, run this on epistolary novels and see the numbers slide.
+
+There is scope for redefining social networks as a network of character relationships, and if I know anything about NLP, I can guess that there are papers that will do the same. Sriharsh's mentioned character relationships github project is worth identifying.
+
+This does not help us very much in character recognition. But- perhaps- the social network approach can help us in character alias disambiguation? It might be worth layering a social-networks-based-approach somewhere on top of the existing pipeline by Hardik Vala (I think he was the person from the two papers?) and seeing how it performs on a novel such as, say, Moonstone, where character disambiguation is a big problem.
+
+It doesn't really help us with the other major problem, that is, minor character recognition.
+
+I really want to run a character recognition system on, say, GOT or LOTR and see how it performs.
