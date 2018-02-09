@@ -1,0 +1,13 @@
+#+TITLE: Thoughts and Notes on The Data
+#+AUTHOR: C.A.L
+
+
+* CL
+
+So much dataaaaaaa.
+
+First of all, I'd like a good knowledge of /where/ is it that the system fails. Which parts does it miss out. I have noticed some interesting differences between the extracted and the gold datasets; I would like to see what linguistic context they fall in.
+
+Hey, I'm a linguist. I'm all about studying linguistic contexts.
+
+This would require some code, because- dude, where the fuck is the actual novels ka corpus?
