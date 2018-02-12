@@ -11,3 +11,5 @@ First of all, I'd like a good knowledge of /where/ is it that the system fails. 
 Hey, I'm a linguist. I'm all about studying linguistic contexts.
 
 This would require some code, because- dude, where the fuck is the actual novels ka corpus?
+
+# update: found corpus

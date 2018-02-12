@@ -2,6 +2,12 @@
 #+AUTHOR: KW
 
 * What is wrong with NER-based approaches
+* Defining The Final Graph
+
+  + Nodes :: Character aliases
+  + Edges :: connecting aliases of a single character
+  + Graph :: Single Character
+
 * Detecting Characters
 
 An *8-stage* pipeline is propopsed for detecting characters.
@@ -26,6 +32,68 @@ This pipeline builds a graph where nodes are names and edges connect names belon
 | (Heuristics) |        | (Rules based on ) | ---> | By Character-Asso-    | ---> | Nodes (??????)          |
 |              |        | Corpora)          |      | ciated Verbs          |      |                         |
 |--------------+--------+-------------------+------+-----------------------+------+-------------------------|
+
+** NER 
+
+Recognition of character aliases that are Named Entities. Each NE is a single node at this point. Done using Stanford CoreNLP NER tagger.
+
+** If-Follows-Honorific
+
+Also recognise names that follow a certain set of honorifics. I.e: if phrase follows honorific = {Mr, Mrs, Ms, Master}, then tag it as a character and add a node to it in the graph.
+
+** Coreference Resolution
+
+   - Coreference resolution is run to indentify coreference chains
+   - Edges are added between two nodes when the names belonging to the two nodes co-occur in a chain
+
+** Name Variation Rules
+
+A rule-based system to identify common variations on a single name, under the hypothesis that, say, two nodes bearing the names "Tim" and "Timmy" will belong to the same character. Connect nodes that match in name variations.
+
+** Hypocorisms
+
+Hypocorisms i.e: common variations on names. A gazzetteer is used to identify these. Connect nodes accordingly.
+** Prohibitions on Name-Merging : Rules
+
+Here, we add the concept of an =anti-edge= : an edge connecting two aliases that cannot be merged into the same character, i.e: two aliases that are definitively determined to belong to different characters.
+
+We add an anti-edge between two nodes when:
+
+(1) The inferred gender of two nodes differ
+(2) Both names share a common surname but different first names
+(3) The honorifics attached to both names differ.
+(4) Both names appear connected by a conjunction
+(5) One name appears as the speaker mentioning the other name in direct speech
+(6) Both names appear together in a quotation
+
+** Non-Named-Entity Characters
+
+Minor characters play important rules in stories, and have dialogues and events associated with them, but may not be named. Instead, they may, for example, have role-based referents such as "the governor" or "the archbishop".
+
+The technique adopted to discover such characters is a bootstrapping technique based on corpora from the novels themselves:
+
+(1) The =Project Gutenberg Fiction Corpus= was =dependency parsed= to identify all verbs in a dependency relaiton with nouns
+(2) Each noun in the corpus was categorised as either:
+    (a) A named entity
+    (b) Having it's first sense in Wordnet refer to an animate entity
+    (c) Neither
+
+(3) All verbs in dependency relations with nouns were then ranked according to their ratio of type-(a)-noun-associated / type-(c)-noun-associated
+
+(4) A number (2,073, but that is not important) verbs-and-dependency-pairs were decided, after experimentation, to show character-like-behaviours
+
+(5) In the test corpus (presumably), nouns appearing (in dependency relations) with the verb-set identified in (4) were added to the graph as characters, with one prohibition:
+   (a) Names belonging to a small stop-list of 22 generic nouns (eg: man) were not added
+** Removal of Disconnected Nodes
+
+Nodes that are:
+
+(1) Disconnected from the rest of the graph
+(2) Bear a name that is a portion of one or more names for the other nodes
+
+Are removed.
+
+Thus, the remaining sets of graphs represent sets of aliases associated with characters.
 
 * Stanford CoreNLP CorefAnnotator
 

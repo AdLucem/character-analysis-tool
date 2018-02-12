@@ -35,7 +35,7 @@ A continuous span of narrative time featuring a set of characters in which the f
 
 #+END_QUOTE
 
-* Solving The Subproblems
+* The Methods Used
 
 Oh, they /generate/ name variations from identified Named Entities.
 
