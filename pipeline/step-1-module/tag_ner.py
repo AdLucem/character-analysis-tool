@@ -8,6 +8,21 @@ import json
 import os
 
 
+def get_raw_data_location(filepath):
+
+    with open(filepath, 'r+') as f:
+
+        s = f.readlines()
+
+    return s[0]
+
+
+def attach_offsets(text):
+
+    # fill in this function
+    return []
+
+
 # purely procedural text-processing piece of crap
 if __name__ == '__main__':
 
@@ -23,7 +38,7 @@ if __name__ == '__main__':
         data_with_offsets = attach_offsets(raw_data)
 
         # run the NER tagger on the raw text file
-        
+ 
 
 
 
